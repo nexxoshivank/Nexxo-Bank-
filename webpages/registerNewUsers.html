@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel = "stylesheet" href = "http://localhost:8080//myApp/style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Registration</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp" style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div>
+<a href="adminDashboard.html">go to dashboard</a>
+<div class="header1">
+    <h2>Register Customer</h2><br>
+</div>
+<center>
+    <div>
+
+        <div class="form2"><br>
+
+            <label class="f1" for="fname"><b>Firstname : </b></label>
+            <input type="text" name = "firstName" placeholder="" id="fname" required>
+
+            <label class="f1" for="lname"><b>Lastname : </b></label>
+            <input type="text" name="lastName" placeholder="" id="lname" required>
+
+            <label class="f1" for="mno"><b>Mobile No. : </b></label>
+            <input type="tel" name="mobile" placeholder="" id="mno"  required>
+
+            <label class="f1" for="ema"><b>Email : </b></label>
+            <input type="email" name="email" placeholder="" id="ema"  required>
+
+            <label class="f1" for="dob"><b>Date of Birth : </b></label>
+            <input type="date" name="dob" placeholder="" id="dob"  required>
+
+            <label class="f1" for="adhar"><b>Aadhaar No : </b></label>
+            <input type="number" name="aadhaarNumber" placeholder="" id="adhar"  required>
+
+            <label class="f1" for="pan"><b>Pan No. : </b></label>
+            <input type="text" name="panNumber" placeholder="" id="pan"  required>
+
+            <label class="f1" for="pswd"><b>Enter Password : </b></label>
+            <input type="password" name="password" placeholder="" id="pswd" required>
+
+            <label class="f1" for="pswd1"><b>Confirm Password : </b></label>
+            <input type="password" name="confirmPassword" placeholder="" id="pswd1" required>
+
+            <br><br><br>
+            <button type="submit" id="submit">Register</button>
+        </div>
+    </div>
+</center>
+</body>
+<script>
+    $("#submit").click(function(){
+    var firstname = $("#fname").val();
+    var lastname  = $("#lname").val();
+    var mobile = $("#mno").val();
+    var email = $("#ema").val();
+    var dob = $("#dob").val();
+    var aadhar = $("#adhar").val();
+    var pan = $("#pan").val();
+    var password = $("#pswd").val();
+    var confirmPassword = $("#pswd1").val();
+
+
+    if(firstname && lastname && mobile && email && email && dob && aadhar && pan && password && confirmPassword ){
+    if( password==confirmPassword){
+    $.ajax ({
+    type : "POST",
+    url  : "http://localhost:9000/save/data",
+    data : {
+    firstName : firstname,
+    lastName : lastname,
+    mobile : mobile,
+    email : email,
+    dob : dob,
+    aadhaarNumber : aadhar,
+    panNumber : pan,
+    password : password
+    },
+    success : function(response){
+    alert(response.statusName)},
+    error : function(response){
+    alert("error1");}
+
+    });
+    }
+    else{
+    alert("Password Did not matched");}
+    }
+    else {
+    alert("Fill out all fields");}
+    });
+</script>
+</html>

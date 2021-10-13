@@ -1,0 +1,16 @@
+@startuml
+start
+:Register New User;
+repeat :Enter Customer Details;
+if (Details) then (existed)
+:User Already Registered;
+end
+else (Proceed)
+:Details and Documents Submitted;
+if (Details and Documents Verified) then (verified)
+:Account Created;
+stop
+else (ReEnter Details)
+
+
+@enduml

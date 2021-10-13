@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Customer" as c
+rectangle CustomerBankApp {
+usecase " Login" as uc1
+usecase " Account Statements " as uc3
+usecase "Profile Details" as uc4
+usecase "Send Money" as uc5
+usecase "Give Feedback " as uc6
+}
+c--> uc1
+c--> uc3
+c--> uc4
+c--> uc5
+c--> uc6
+@enduml

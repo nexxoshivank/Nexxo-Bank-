@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://localhost:8080//myApp/style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title> Nexxo Bank </title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp" style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div>
+<br><br>
+<div class="header1">
+    <h2>
+        ENTER LOGIN DETAILS
+    </h2>
+    <br><br><br>
+</div>
+<center>
+    
+        <div class="form">
+            <br><br>
+            <label style="position: relative;right:-10px  "> User Id </label>
+            <input style="position: relative;right:-8px" id="uid" type="text" name="userId" placeholder="username"
+                   required> <br> <br>
+            <label> Password</label>
+            <input type="password" placeholder="password" id="pass" name="pass" required> <br> <br>
+            <button type="submit"> Login</button>
+        </div>
+
+</center>
+
+<script>
+
+$("button").click(function(e) {
+    e.preventDefault();
+       var pswd= $("#pass").val();
+       var id= $("#uid").val();
+<!--       var int= parseInt(id);-->
+    if(id && pswd){
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:9000/login/check",
+        data: {
+            userId: id,
+            pass : pswd
+        },
+        success: function(result) {
+                      switch(result.role) {
+                       case "customer":
+                          location.href="http://localhost:8080/myApp/dashboard.html?userId="+id;
+                                       break;
+                       case "admin":
+                          location.href="http://localhost:8080/myApp/adminDashboard.html?userId="+id;
+                              break;
+                       default:
+                          alert("Message: "+result.statusName);
+                       }
+					    },
+        error: function(result) {
+            alert("error");
+        }
+    });
+
+    }
+    else
+    alert("Please enter credentials");
+
+});
+
+</script>
+
+</body>
+</html>

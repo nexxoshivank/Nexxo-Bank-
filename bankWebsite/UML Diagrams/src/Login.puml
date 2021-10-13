@@ -1,0 +1,39 @@
+@startuml
+start
+:Login;
+repeat :Enter Username;
+repeat while (username) is (no user found)
+->user found;
+  repeat :Enter Password;
+   if (password) then (correct)
+    :Logged In;
+      stop
+else (wrong)
+if (attempts) then (attempts>3)
+:Account Blocked - Contact Admin.;
+stop
+else (retry)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@enduml

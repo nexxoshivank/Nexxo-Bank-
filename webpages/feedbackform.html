@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://localhost:8080//myApp/style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>FeedBack Form</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp" style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div>
+<br>
+<center>
+
+    <h2>FEEDBACK FORM</h2><br>
+    <textarea placeholder="Enter your feedback" id="feedback" style="height:200px; width:400px"></textarea><br><br>
+    <button type="submit" id="submit"> Submit Feedback</button>
+
+</center>
+
+</body>
+<script>
+    $(document).ready(function(){
+    var urlData = window.location.search;
+    var urlParam = new URLSearchParams(urlData);
+    var id = urlParam.get("userId");
+
+    $("#submit").click(function(){
+    var feedback = $("#feedback").val();
+
+    if(feedback){
+    $.ajax ({
+
+    type : "POST",
+    url  : "http://localhost:9000/feedback",
+    data : {
+    userId : id,
+    feedback : feedback
+    },
+    success : function(response){
+    alert(response.statusName);
+    location.href = "/myApp/dashboard.html";
+    },
+    error : function(response){
+    alert("error");
+   }
+   });
+   }
+   else{
+   alert("please enter feedback")
+   }
+   });
+   });
+
+</script>
+</html>

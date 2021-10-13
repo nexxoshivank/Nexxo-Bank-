@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Profile Details;
+:Profile Shown;
+fork
+:Name;
+fork again;
+: Account Number;
+fork again
+: Other Details;
+end fork
+stop
+
+@enduml

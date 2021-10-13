@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel = "stylesheet" href = "http://localhost:8080//myApp/style.css">
+<script type="text/javascript" src="jquery.min.js"></script>
+    <title>Account Statements</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp" style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div>
+<center><h2>Transaction History</h2></center>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+<table style="width:100%" id=" table">
+    <tr>
+        <th>Transaction Id</th>
+        <th>Merchant</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Transaction Type</th>
+    </tr>
+    <tbody id="result">
+    </tbody>
+</table>
+</body>
+<script>
+    $(document).ready(function(){
+    var urlData = window.location.search;
+    var urlParam = new URLSearchParams(urlData);
+    var id = urlParam.get("userId");
+
+    $.ajax({
+    type : "GET",
+    url  : "http://localhost:9000/render/accountStatements",
+    data : {
+    userId : id
+    },
+    success : function(response){
+         var dataList;
+    $.each(response, function(i,item){
+
+    if(item.transId){
+
+	dataList += '<tr>';
+	dataList += '<td>' + item.transId + '</td>';
+	dataList += '<td>' + item.merchant + '</td>';
+	dataList += '<td>' + item.date + '</td>';
+	dataList += '<td>' + item.amount + '</td>';
+	dataList += '<td>' + item.transactionType + '</td>';
+	dataList += '</tr>';
+    }
+	else{
+	alert(item.statusName);}
+
+    });
+	$("#result").html(dataList);
+    },
+	error : function(response){
+	alert("Error");}
+    });
+    });
+</script>
+</html>

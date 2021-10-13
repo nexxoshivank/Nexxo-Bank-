@@ -1,0 +1,10 @@
+@startuml
+start
+:Deactivate User Account;
+repeat :Search User;
+repeat while (User) is (Wrong Search)
+-> user found;
+:Deactivate User Account;
+stop
+
+@enduml

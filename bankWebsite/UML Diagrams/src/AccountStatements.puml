@@ -1,0 +1,10 @@
+@startuml
+start
+:Account Statement;
+:Recent Transactions Shown;
+stop
+
+
+
+
+@enduml

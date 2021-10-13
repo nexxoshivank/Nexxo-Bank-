@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://localhost:8080//myApp/style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Profile Details</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp" style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div>
+<br>
+<center>
+    <h1> PROFILE DETAILS</h1>
+    <br><br>
+
+    <div><b>Firstname : </b> <span id="fname"></span></div>
+    <br><br>
+    <div><b>Lastname : </b> <span id="lname"></span></div>
+    <br><br>
+    <div><b>Date of Birth : </b> <span id="dob" class="f8"></span></div>
+    <br><br>
+    <div><b>Email Address : </b> <span id="email"></span></div>
+    <br><br>
+    <div><b>Mobile Number : </b> <span id="mobileNo"></span></div>
+    <br><br>
+    <div><b>User ID : </b> <span id="userId"></span></div>
+    <br><br>
+    <div><b>Aadhaar Number : </b> <span id="adhaarNo"></span></div>
+    <br><br>
+    <div><b>Pan Number : </b> <span id="panNo"></span></div>
+    <br>
+
+</center>
+</body>
+<script>
+    $(document).ready(function(){
+    var urlData = window.location.search;
+    var urlParam = new URLSearchParams(urlData);
+    var id = urlParam.get("userId");
+
+    $.ajax({
+    type : "GET",
+    url  : "http://localhost:9000/profile/render",
+    data : {
+    userId : id
+    },
+
+    success : function(result){
+    $('#fname').text(result.firstName);
+    $('#lname').text(result.lastName);
+    $('#dob').text(result.dob);
+    $('#email').text(result.email);
+    $('#mobileNo').text(result.mobile);
+    $('#userId').text(result.userId);
+    $('#adhaarNo').text(result.aadhaarNumber);
+    $('#panNo').text(result.panNumber);
+
+    }
+    });
+    });
+</script>
+</html>

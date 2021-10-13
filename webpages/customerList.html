@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel = "stylesheet" href = "http://localhost:8080//myApp/style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Customer List</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp" style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div><br>
+<center><h2><span id = "heading">Customer List</span></h2></center>
+<br>
+<style>
+table, th, td {
+border: 1px solid black;
+border-collapse: collapse;
+}
+th, td {
+padding: 5px;
+text-align: left;
+}
+</style>
+<table style="width:100%" id=" table">
+    <tr>
+        <th>User ID  </th>
+        <th> First Name </th>
+        <th> Last Name</th>
+        <th>Mobile Number</th>
+        <th>Email</th>
+        <th>Date Of Birth</th>
+        <th>Aadhaar Number</th>
+        <th>Pan Number</th>
+        <th>Account Status</th>
+        <th>Deactivate Customer</th>
+        <th>Activate Customer</th>
+    </tr>
+    <tbody id=table>
+    </tbody>
+</table><br>
+
+<script>
+    $(document).ready(function() {
+    var urlData = window.location.search;
+    var urlParam = new URLSearchParams(urlData);
+    var id = urlParam.get("userId");
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:9000/view/list",
+        success: function(response) {
+            var viewList;
+            $.each(response, function(i, item) {
+                if (item.userId) {
+                    viewList += '<tr>';
+                    viewList += '<td>' + item.userId + '</td>';
+                    viewList += '<td>' + item.customerName + '</td>';
+                    viewList += '<td>' + item.customerLastName + '</td>';
+                    viewList += '<td>' + item.mobile + '</td>';
+                    viewList += '<td>' + item.email + '</td>';
+                    viewList += '<td>' + item.dob + '</td>';
+                    viewList += '<td>' + item.aadhaarNumber + '</td>';
+                    viewList += '<td>' + item.panNumber + '</td>';
+                    viewList += '<td>' + item.accountStatus + '</td>';
+                    viewList += '<td> <button  class= "bu" id=' + item.userId + '>' + " Deactivate" + '</button></td>';
+                    viewList += '<td> <button  class= "bu1" id=' + item.userId + '>' + " Activate" + '</button></td>';
+                    viewList += '</tr>';
+                } else {
+                    alert("No List Found");
+                }
+            });
+            $("#table").html(viewList);
+            bindDeactivate();
+            bindActivate();
+        },
+
+        error: function(response) {
+            alert("Error");
+        }
+    });
+
+    function bindDeactivate() {
+
+        $(".bu").click(function() {
+            var userid = $(this).attr('id');
+
+            if (userid) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:9000/deactivate/customer",
+                    data: {
+                        userId: userid
+                    },
+                    success: function(response) {
+                        alert(response.statusName);
+                    }
+                });
+            } else {
+                alert("error");
+            }
+        });
+    }
+
+
+    function bindActivate() {
+        $(".bu1").click(function() {
+            var userid = $(this).attr('id');
+            if (userid) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:9000/activate/customer",
+                    data: {
+                        userId: userid
+                    },
+                    success: function(response) {
+                        alert(response.statusName);
+                    }
+                });
+            } else {
+                alert("error");
+            }
+        });
+    }
+});
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.header{
+	align-items: center;
+	background-color: #EAF090;
+	text-align: center;
+}
+
+.img{
+  vertical-align: middle;
+  position: relative; top: 20px;
+}
+
+.form {
+  align-items: center;
+  text-align: center;
+  height: 180px;
+  width: 300px;
+  background-color:  #EAF090;
+}
+
+.header1{
+	text-align: center;
+	}
+	.form2{
+  align-items: center;
+  height: 235px;
+  width: 400px;
+  background-color:  #EAF090;
+	}
+	label.f1{
+        display: inline-block;
+        width: 150px;
+        text-align: right;
+	}

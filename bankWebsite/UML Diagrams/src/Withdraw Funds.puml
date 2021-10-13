@@ -1,0 +1,15 @@
+@startuml
+start
+ :Send Money;
+ :Account Transfer;
+ :Enter Details;
+ repeat :Enter Amount;
+ if(amount) then (present)
+ :Proceed;
+ :Transaction Completed;
+ stop
+
+
+
+
+@enduml

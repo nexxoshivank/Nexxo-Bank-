@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+actor "BankAdmin" as ba
+rectangle AdminBankApp {
+usecase "Register New User" as uc1
+usecase "Deactivate User Account" as uc2
+usecase "Total Users List" as uc3
+usecase "Feedback Review" as uc5
+
+}
+ba--> uc1
+ba--> uc2
+ba--> uc3
+
+ba--> uc5
+
+@enduml

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://localhost:8080//myApp/style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <title>Send Money</title>
+</head>
+<body>
+<div class="header">
+    <h1>
+        <img src="http://localhost:8080//myApp/bankicon.png" alt="BankApp"
+             style="height:70px; width:70px; position: relative;  top: 20px;">
+        NEXXO BANK
+    </h1> <br>
+</div>
+<br><br>
+<div><center>
+    <h2>Enter Details</h2>
+    <br><br>
+    <label> Account Number : </label>
+    <input type="text" placeholder="" id="acc"> <br> <br>
+    <label> IFSC Code : </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" placeholder="" id="ifsc"> <br> <br>
+    <label> Amount : </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="number" placeholder="" id="amnt"> <br> <br>
+    <br>
+    <button type="submit" id="submit"> Send Money</button>
+</center>
+
+</div>
+</body>
+<script>
+    $(document).ready(function(){
+    var urlData = window.location.search;
+    var urlParam = new URLSearchParams(urlData);
+    var id = urlParam.get('userId');
+
+    $("#submit").click(function(){
+    var accountNumber = $("#acc").val();
+    var ifsc = $("#ifsc").val();
+    var amount = $("#amnt").val();
+
+    if(accountNumber && ifsc && amount){
+    $.ajax ({
+     type : "POST",
+    url  : "http://localhost:9000/send/money",
+    data : {
+    userId : id,
+    merchantAccountNumber : accountNumber,
+    ifsc : ifsc,
+    amount : amount
+    },
+    success : function(response){
+    alert(response.statusName)},
+    error : function(response){
+    alert("error");
+    }
+    });
+    }
+    else{
+    alert("please enter credentials")}
+    });
+    });
+
+</script>
+</html>

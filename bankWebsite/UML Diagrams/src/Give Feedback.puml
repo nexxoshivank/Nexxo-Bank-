@@ -1,0 +1,9 @@
+@startuml
+start
+:Feedback;
+repeat :EnterFeedback;
+repeat while (feedback) is (No input)
+:FeedbackSaved;
+stop
+
+@enduml
