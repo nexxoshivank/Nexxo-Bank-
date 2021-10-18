@@ -52,7 +52,11 @@
     amount : amount
     },
     success : function(response){
-    alert(response.statusName)},
+    alert(response.statusName)
+    if(response.statusName=="Money Sent Successfully"){
+    location.href = "/myApp/dashboard.html?userId="+id;
+    }
+    },
     error : function(response){
     alert("error");
     }

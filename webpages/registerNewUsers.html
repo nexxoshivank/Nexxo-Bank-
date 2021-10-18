@@ -56,6 +56,12 @@
 </center>
 </body>
 <script>
+
+$(document).ready(function(){
+    var urlData = window.location.search;
+    var urlParam = new URLSearchParams(urlData);
+    var id = urlParam.get("userId");
+
     $("#submit").click(function(){
     var firstname = $("#fname").val();
     var lastname  = $("#lname").val();
@@ -84,7 +90,12 @@
     password : password
     },
     success : function(response){
-    alert(response.statusName)},
+    alert(response.statusName)
+    if(response.statusName== "User Registered"){
+    location.href = "/myApp/adminDashboard.html?userId="+id;
+    }
+    },
+
     error : function(response){
     alert("error1");}
 
@@ -95,6 +106,8 @@
     }
     else {
     alert("Fill out all fields");}
+    });
+
     });
 </script>
 </html>
